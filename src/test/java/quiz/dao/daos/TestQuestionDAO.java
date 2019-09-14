@@ -16,7 +16,7 @@ public class TestQuestionDAO {
     public void cleanup() {
         EntityManager entityManager = EMF.createEntityManager();
         entityManager.getTransaction().begin();
-//        entityManager.createNativeQuery("delete from question").executeUpdate(); // is not necessary
+        entityManager.createNativeQuery("delete from question").executeUpdate(); // is not necessary
         entityManager.createNativeQuery("delete from category").executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -36,24 +36,15 @@ public class TestQuestionDAO {
         question1.setQuestionDifficulty(QuestionDifficulty.HIGH);
         question1.setCategory(category);
 
-        Question question2 = new Question();
-        question2.setText("text2");
-        question2.setQuestionType(QuestionType.OPEN);
-        question2.setQuestionDifficulty(QuestionDifficulty.HIGH);
-        question2.setCategory(category);
-
         QuestionDAO questionDAO = new QuestionDAO();
+
         // test this
         questionDAO.create(question1);
-        questionDAO.create(question2);
 
         // verify insert question object
         Question insertedQuestion1 = questionDAO.read(question1.getId());
         Assert.assertNotNull(insertedQuestion1);
-        Question insertedQuestion2 = questionDAO.read(question2.getId());
-        Assert.assertNotNull(insertedQuestion2);
-        // verify if is synchronized List<Question>
-        Assert.assertEquals(2, categoryDAO.read(category.getId()).getQuestions().size());
+
     }
 
     @Test
@@ -88,22 +79,29 @@ public class TestQuestionDAO {
         CategoryDAO categoryDAO = new CategoryDAO();
         categoryDAO.create(category);
 
-        Question question = new Question();
-        question.setText("text4");
-        question.setQuestionType(QuestionType.OPEN);
-        question.setQuestionDifficulty(QuestionDifficulty.HIGH);
-        question.setCategory(category);
+        Question existingQuestion = new Question();
+        existingQuestion.setText("text4");
+        existingQuestion.setQuestionType(QuestionType.OPEN);
+        existingQuestion.setQuestionDifficulty(QuestionDifficulty.HIGH);
+        existingQuestion.setCategory(category);
         QuestionDAO questionDAO = new QuestionDAO();
-        questionDAO.create(question);
+        questionDAO.create(existingQuestion);
+
+        Question newQuestion = new Question();
+        newQuestion.setText("text5");
+        newQuestion.setQuestionType(QuestionType.CHOICE);
+        newQuestion.setQuestionDifficulty(QuestionDifficulty.LOW);
+        newQuestion.setCategory(category);
 
         // test this
-        Question question1 = questionDAO.read(question.getId());
-        question1.setText("text5");
-        questionDAO.update(question1);
+        Question existing = questionDAO.read(existingQuestion.getId());
+        questionDAO.update(existing, newQuestion);
 
         // verify
-        Question updatedQuestion = questionDAO.read(question.getId());
-        Assert.assertEquals("text5", updatedQuestion.getText());
+        Question updatedQuestion = questionDAO.read(existingQuestion.getId());
+        Assert.assertEquals(updatedQuestion.getText(), newQuestion.getText());
+        Assert.assertEquals(updatedQuestion.getQuestionType(), newQuestion.getQuestionType());
+        Assert.assertEquals(updatedQuestion.getQuestionDifficulty(), newQuestion.getQuestionDifficulty());
 
     }
 

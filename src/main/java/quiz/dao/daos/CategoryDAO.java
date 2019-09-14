@@ -28,15 +28,15 @@ public class CategoryDAO {
         return category;
     }
 
-    public void update(Category category) throws EntityNotFoundException {
+    public void update(Category existingCategory, Category newCategory) throws EntityNotFoundException {
         EntityManager entityManager = EMF.createEntityManager();
         entityManager.getTransaction().begin();
 
-        Category existing = entityManager.find(Category.class, category.getId());
+        Category existing = entityManager.find(Category.class, existingCategory.getId());
         if (existing == null) {
             throw new EntityNotFoundException("Entitatea nu exista.");
         }
-        existing.setName(category.getName());
+        existing.setName(newCategory.getName());
 
         entityManager.getTransaction().commit();
         entityManager.close();

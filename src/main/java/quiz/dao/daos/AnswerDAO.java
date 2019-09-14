@@ -28,15 +28,15 @@ public class AnswerDAO {
         return answer;
     }
 
-    public void update(Answer answer) throws EntityNotFoundException {
+    public void update(Answer existingAnswer, Answer newAnswer) throws EntityNotFoundException {
         EntityManager entityManager = EMF.createEntityManager();
         entityManager.getTransaction().begin();
 
-        Answer existing = entityManager.find(Answer.class, answer.getId());
+        Answer existing = entityManager.find(Answer.class, existingAnswer.getId());
         if (existing == null) {
             throw new EntityNotFoundException("Entitatea nu exista.");
         }
-        existing.setText(answer.getText());
+        existing.setText(newAnswer.getText());
 
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -48,7 +48,6 @@ public class AnswerDAO {
 
         Answer existingAnswer = entityManager.find(Answer.class, answer.getId());
         if (existingAnswer != null) {
-            existingAnswer.getQuestion().removeAnswer(existingAnswer);
             entityManager.remove(existingAnswer);
         }
 

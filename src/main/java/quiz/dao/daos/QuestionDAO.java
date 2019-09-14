@@ -28,17 +28,17 @@ public class QuestionDAO {
         return question;
     }
 
-    public void update(Question question) throws EntityNotFoundException {
+    public void update(Question existingQuestion, Question newQuestion) throws EntityNotFoundException {
         EntityManager entityManager = EMF.createEntityManager();
         entityManager.getTransaction().begin();
 
-        Question existing = entityManager.find(Question.class, question.getId());
+        Question existing = entityManager.find(Question.class, existingQuestion.getId());
         if (existing == null) {
             throw new EntityNotFoundException("Entitatea nu exista.");
         }
-        existing.setText(question.getText());
-        existing.setQuestionType(question.getQuestionType());
-        existing.setQuestionDifficulty(question.getQuestionDifficulty());
+        existing.setText(newQuestion.getText());
+        existing.setQuestionType(newQuestion.getQuestionType());
+        existing.setQuestionDifficulty(newQuestion.getQuestionDifficulty());
 
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -50,7 +50,6 @@ public class QuestionDAO {
 
         Question existingQuestion = entityManager.find(Question.class, question.getId());
         if (existingQuestion != null) {
-            existingQuestion.getCategory().removeQuestion(existingQuestion);
             entityManager.remove(existingQuestion);
         }
 

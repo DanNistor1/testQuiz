@@ -26,26 +26,8 @@ public class Question extends TemplateEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
-
-
-/*    @OneToMany(fetch = FetchType.EAGER, mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "question")
     private List<Answer> answers = new ArrayList<>();
-
-    public List<Answer> getAnswers() {
-        return answers;
-    }
-
-    public void addAnswer(Answer answer) {
-        answers.add(answer);
-        answer.setQuestion(this);
-    }
-
-    public void removeAnswer(Answer answer) {
-        answers.remove(answer);
-        answer.setQuestion(null);
-    }*/
-
-
 
     public void setCategory(Category category) {
         this.category = category;
@@ -53,6 +35,10 @@ public class Question extends TemplateEntity {
 
     public Category getCategory() {
         return category;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
     public String getText() {

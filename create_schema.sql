@@ -14,3 +14,10 @@ CREATE TABLE question (
 alter table question add column category_id int;
 alter table question add constraint category_fk foreign key (category_id) references category(id) ON DELETE CASCADE;
 
+CREATE TABLE answer (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    text VARCHAR(30) NOT NULL,
+    value boolean NOT NULL CHECK (value = 'TRUE' or value = 'FALSE'),
+    question_id INT,
+    constraint question_fk foreign key (question_id) references question(id) ON DELETE CASCADE
+    );
