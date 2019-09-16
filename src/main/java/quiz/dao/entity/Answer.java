@@ -23,16 +23,16 @@ public class Answer extends TemplateEntity {
         return question;
     }
 
+    public void setQuestion(Question question) {
+        this.question = question;
+    }
+
     public AnswerValue getValue() {
         return value;
     }
 
     public void setValue(AnswerValue value) {
         this.value = value;
-    }
-
-    public void setQuestion(Question question) {
-        this.question = question;
     }
 
     public String getText() {

@@ -17,7 +17,7 @@ alter table question add constraint category_fk foreign key (category_id) refere
 CREATE TABLE answer (
     id INT AUTO_INCREMENT PRIMARY KEY,
     text VARCHAR(30) NOT NULL,
-    value boolean NOT NULL CHECK (value = 'TRUE' or value = 'FALSE'),
+    value VARCHAR(30) NOT NULL CHECK (value = 'TRUE' or value = 'FALSE'),
     question_id INT,
     constraint question_fk foreign key (question_id) references question(id) ON DELETE CASCADE
     );

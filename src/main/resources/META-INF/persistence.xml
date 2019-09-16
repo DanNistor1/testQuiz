@@ -38,7 +38,7 @@
             <property name="hibernate.default_schema" value=""/>
 
             <!--<property name="javax.persistence.schema-generation.database.action" value="none"/>-->
-            <property name="javax.persistence.schema-generation.database.action" value="create"/>
+            <property name="javax.persistence.schema-generation.database.action" value="none"/>
 
             <!-- generate scripts -->
             <!--<property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>-->

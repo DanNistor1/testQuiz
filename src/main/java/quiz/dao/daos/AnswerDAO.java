@@ -37,6 +37,7 @@ public class AnswerDAO {
             throw new EntityNotFoundException("Entitatea nu exista.");
         }
         existing.setText(newAnswer.getText());
+        existing.setValue(newAnswer.getValue());
 
         entityManager.getTransaction().commit();
         entityManager.close();

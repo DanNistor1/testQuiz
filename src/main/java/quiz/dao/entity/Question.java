@@ -65,4 +65,14 @@ public class Question extends TemplateEntity {
         this.questionDifficulty = questionDifficulty;
     }
 
+    public void addAnswer(Answer answer) {
+        answers.add(answer);
+        answer.setQuestion(this);
+    }
+
+    public void removeAnswer(Answer answer) {
+        answers.remove(answer);
+        answer.setQuestion(null);
+    }
+
 }

@@ -1,6 +1,9 @@
 package quiz.dao.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,4 +28,15 @@ public class Category extends TemplateEntity {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void addQuestion(Question question) {
+        questions.add(question);
+        question.setCategory(this);
+    }
+
+    public void removeQuestion(Question question) {
+        questions.remove(question);
+        question.setCategory(null);
+    }
+
 }
