@@ -12,6 +12,7 @@
         <class>quiz.dao.entity.Category</class>
         <class>quiz.dao.entity.Question</class>
         <class>quiz.dao.entity.Answer</class>
+        <class>quiz.dao.entity.TestSet</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 

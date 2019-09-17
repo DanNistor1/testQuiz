@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Question")
+@Table(name = "question")
 public class Question extends TemplateEntity {
 
     @Column(nullable = false, name = "text")
@@ -26,8 +26,15 @@ public class Question extends TemplateEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "questions")
+    private List<TestSet> tests = new ArrayList<>();
+
+    public List<TestSet> getTests() {
+        return tests;
+    }
 
     public void setCategory(Category category) {
         this.category = category;

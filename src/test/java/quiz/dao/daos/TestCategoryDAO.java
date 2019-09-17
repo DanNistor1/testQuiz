@@ -23,6 +23,7 @@ public class TestCategoryDAO {
     public void cleanup() {
         EntityManager entityManager = EMF.createEntityManager();
         entityManager.getTransaction().begin();
+        entityManager.createNativeQuery("delete from test").executeUpdate();
         entityManager.createNativeQuery("delete from category").executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();

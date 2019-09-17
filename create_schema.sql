@@ -21,3 +21,16 @@ CREATE TABLE answer (
     question_id INT,
     constraint question_fk foreign key (question_id) references question(id) ON DELETE CASCADE
     );
+
+CREATE TABLE test (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    created_date VARCHAR(30) NOT NULL
+    );
+
+create table test_question (
+	test_id INT,
+    question_id INT,
+    primary key (test_id, question_id),
+    foreign key (test_id) references test(id),
+    foreign key (question_id) references question(id)
+    );

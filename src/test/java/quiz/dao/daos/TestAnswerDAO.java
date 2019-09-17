@@ -27,6 +27,7 @@ public class TestAnswerDAO {
         entityManager.getTransaction().begin();
 //        entityManager.createNativeQuery("delete from answer").executeUpdate(); // is not necessary
 //        entityManager.createNativeQuery("delete from question").executeUpdate(); // is not necessary
+        entityManager.createNativeQuery("delete from test").executeUpdate();
         entityManager.createNativeQuery("delete from category").executeUpdate();
         entityManager.getTransaction().commit();
         entityManager.close();

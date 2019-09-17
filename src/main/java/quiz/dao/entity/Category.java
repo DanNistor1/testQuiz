@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "Category")
+@Table(name = "category")
 public class Category extends TemplateEntity {
 
     @Column(nullable = false, name = "name")

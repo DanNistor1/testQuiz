@@ -13,7 +13,7 @@ import quiz.dao.enums.QuestionType;
 
 import javax.persistence.EntityManager;
 
-public class TestQuestionDAO {
+public class TestTestSetDAO {
 
     Answer answer = new Answer();
     Question question = new Question();
@@ -21,6 +21,8 @@ public class TestQuestionDAO {
     TestSet testSet = new TestSet();
     CategoryDAO categoryDAO = new CategoryDAO();
     QuestionDAO questionDAO = new QuestionDAO();
+    TestDAO testDAO = new TestDAO();
+    AnswerDAO answerDAO = new AnswerDAO();
 
     @Before
     public void cleanup() {
@@ -43,6 +45,9 @@ public class TestQuestionDAO {
         question.setQuestionDifficulty(QuestionDifficulty.HIGH);
         question.addAnswer(answer);
 
+        testSet.setDate("2019-09-17");
+        testSet.addQuestion(question);
+
         category.setName("cat1");
         category.addQuestion(question);
     }
@@ -51,13 +56,13 @@ public class TestQuestionDAO {
     public void testCreate() {
 
         categoryDAO.create(category);
-
-        // test this
         questionDAO.create(question);
 
+        // test this
+        testDAO.create(testSet);
         // verify insert question object
-        Question insertedQuestion = questionDAO.read(question.getId());
-        Assert.assertNotNull(insertedQuestion);
+        TestSet insertedTestSet = testDAO.read(testSet.getId());
+        Assert.assertNotNull(insertedTestSet);
     }
 
     @Test
@@ -65,33 +70,31 @@ public class TestQuestionDAO {
 
         categoryDAO.create(category);
         questionDAO.create(question);
+        testDAO.create(testSet);
 
         // test this
-        Question readedQuestion = questionDAO.read(question.getId());
+        TestSet readedTestSet = testDAO.read(testSet.getId());
 
         // verify
-        Assert.assertNotNull(readedQuestion);
+        Assert.assertNotNull(readedTestSet);
     }
 
     @Test
     public void testUpdate() {
-        Question newQuestion = new Question();
-        newQuestion.setText("text3");
-        newQuestion.setQuestionType(QuestionType.CHOICE);
-        newQuestion.setQuestionDifficulty(QuestionDifficulty.LOW);
+        TestSet newTestSet = new TestSet();
+        newTestSet.setDate("2000-09-17");
 
         categoryDAO.create(category);
         questionDAO.create(question);
+        testDAO.create(testSet);
 
         // test this
-        Question existing = questionDAO.read(question.getId());
-        questionDAO.update(existing, newQuestion);
+        TestSet existing = testDAO.read(testSet.getId());
+        testDAO.update(existing, newTestSet);
 
         // verify
-        Question updatedQuestion = questionDAO.read(existing.getId());
-        Assert.assertEquals(newQuestion.getText(), updatedQuestion.getText());
-        Assert.assertEquals(newQuestion.getQuestionType(), updatedQuestion.getQuestionType());
-        Assert.assertEquals(newQuestion.getQuestionDifficulty(), updatedQuestion.getQuestionDifficulty());
+        TestSet updatedTestSet = testDAO.read(existing.getId());
+        Assert.assertEquals(newTestSet.getDate(), updatedTestSet.getDate());
     }
 
     @Test
@@ -99,14 +102,15 @@ public class TestQuestionDAO {
 
         categoryDAO.create(category);
         questionDAO.create(question);
+        testDAO.create(testSet);
 
         // test this
-        Question inserted = questionDAO.read(question.getId());
+        TestSet inserted = testDAO.read(testSet.getId());
         Assert.assertNotNull(inserted);
-        questionDAO.delete(inserted);
+        testDAO.delete(inserted);
 
         // verify delete question
-        Question existing = questionDAO.read(question.getId());
+        TestSet existing = testDAO.read(testSet.getId());
         Assert.assertNull(existing);
     }
 }

@@ -5,7 +5,7 @@ import quiz.dao.enums.AnswerValue;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Answer")
+@Table(name = "answer")
 public class Answer extends TemplateEntity {
 
     @Column(nullable = false, name = "text")
