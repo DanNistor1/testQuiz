@@ -93,8 +93,8 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.3.7.Final</version>
-            <scope>test</scope>
+            <version>5.4.4.Final</version>
+            <!--            <scope>test</scope>-->
         </dependency>
 
         <!-- JPA METAMODEL -->

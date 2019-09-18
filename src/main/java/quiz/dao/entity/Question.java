@@ -29,7 +29,8 @@ public class Question extends TemplateEntity {
     @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<Answer> answers = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "questions")
+    @ManyToMany(mappedBy = "questions", fetch = FetchType.EAGER)
+    // mapped se refera la numele listei de intrebari din TestSet
     private List<TestSet> tests = new ArrayList<>();
 
     public List<TestSet> getTests() {
