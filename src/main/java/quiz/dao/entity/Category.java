@@ -17,6 +17,13 @@ public class Category extends TemplateEntity {
     @OneToMany(mappedBy = "category")
     private List<Question> questions = new ArrayList<>();
 
+    public Category() {
+    }
+
+    public Category(String name) {
+        this.name = name;
+    }
+
     public List<Question> getQuestions() {
         return questions;
     }

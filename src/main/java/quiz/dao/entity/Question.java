@@ -33,6 +33,16 @@ public class Question extends TemplateEntity {
     // mapped se refera la numele listei de intrebari din TestSet
     private List<TestSet> tests = new ArrayList<>();
 
+    public Question() {
+    }
+
+    public Question(String text, QuestionType questionType, QuestionDifficulty questionDifficulty, Category category) {
+        this.text = text;
+        this.questionType = questionType;
+        this.questionDifficulty = questionDifficulty;
+        this.category = category;
+    }
+
     public List<TestSet> getTests() {
         return tests;
     }

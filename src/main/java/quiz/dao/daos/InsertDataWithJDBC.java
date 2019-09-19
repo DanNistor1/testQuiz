@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InsertData {
+public class InsertDataWithJDBC {
     public static void main(String[] args) {
         Connection connection = null;
         try {
@@ -17,20 +17,20 @@ public class InsertData {
 */
 /*
             statement.executeUpdate("insert into question(text, questionType, questionDifficulty, category_id) values " +
-                    "('text1', 'OPEN', 'LOW', 536)," +
-                    "('text2', 'OPEN', 'MEDIUM', 536)," +
-                    "('text3', 'OPEN', 'HIGH', 536)," +
-                    "('text4', 'CHOICE', 'LOW', 537)," +
-                    "('text5', 'CHOICE', 'MEDIUM', 537)," +
-                    "('text6', 'CHOICE', 'HIGH', 537)" );
+                    "('question1', 'OPEN', 'LOW', 536)," +
+                    "('question2', 'OPEN', 'MEDIUM', 536)," +
+                    "('question3', 'OPEN', 'HIGH', 536)," +
+                    "('question4', 'CHOICE', 'LOW', 537)," +
+                    "('question5', 'CHOICE', 'MEDIUM', 537)," +
+                    "('question6', 'CHOICE', 'HIGH', 537)" );
 */
             statement.executeUpdate("insert into answer(text, value, question_id) values " +
-                    "('text1', 'TRUE', 7)," +
-                    "('text2', 'TRUE', 8)," +
-                    "('text3', 'TRUE', 9)," +
-                    "('text4', 'FALSE', 10)," +
-                    "('text5', 'FALSE', 11)," +
-                    "('text6', 'FALSE', 12)");
+                    "('answer1', 'TRUE', 7)," +
+                    "('answer2', 'TRUE', 8)," +
+                    "('answer3', 'TRUE', 9)," +
+                    "('answer4', 'TRUE', 10)," +
+                    "('answer5', 'TRUE', 11)," +
+                    "('answer6', 'TRUE', 12)");
 
         } catch (SQLException e) {
             e.printStackTrace();

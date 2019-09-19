@@ -36,7 +36,11 @@ public class Service {
     public static void setOfQuestions(List resultList) {
         TestSet testSet = new TestSet();
         for (int i = 1; i <= 3; i++) {
-            testSet.addQuestion(randomQuestion(resultList));
+            Question question;
+            do {
+                question = randomQuestion(resultList);
+            } while (testSet.getQuestions().contains(question));
+            testSet.addQuestion(question);
         }
         TestDAO testDAO = new TestDAO();
         testDAO.create(testSet);
@@ -55,7 +59,7 @@ public class Service {
 
     public static Question randomQuestion(List<Question> questionList) {
         Random random = new Random();
-        int n = (random.nextInt(questionList.size() * 1000)) / 1000;
+        int n = random.nextInt(questionList.size());
         Question question = questionList.get(n);
         return question;
     }

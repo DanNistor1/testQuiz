@@ -19,6 +19,15 @@ public class Answer extends TemplateEntity {
     @JoinColumn(name = "question_id")
     private Question question;
 
+    public Answer() {
+    }
+
+    public Answer(String text, AnswerValue value, Question question) {
+        this.text = text;
+        this.value = value;
+        this.question = question;
+    }
+
     public Question getQuestion() {
         return question;
     }

@@ -34,6 +34,10 @@ public class TestSet extends TemplateEntity {
         this.date = date;
     }
 
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
     public void addQuestion(Question question) {
         questions.add(question);
         question.getTests().add(this);
