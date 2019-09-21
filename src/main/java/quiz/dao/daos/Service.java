@@ -50,7 +50,7 @@ public class Service {
         EntityManager entityManager = EMF.createEntityManager();
         entityManager.getTransaction().begin();
 
-        List<Question> resultList = (List<Question>) entityManager.createQuery("SELECT q FROM Question q").getResultList();
+        List<Question> resultList = entityManager.createQuery("SELECT q FROM Question q", Question.class).getResultList();
 
         entityManager.getTransaction().commit();
         entityManager.close();
